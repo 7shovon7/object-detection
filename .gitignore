@@ -1,5 +1,15 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,python,visualstudiocode,pycharm
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,python,visualstudiocode,pycharm
+# YOLO and model files
+models/
+*.pt
+*.weights
+*.cfg
+*.names
+*.onnx
+*.engine
+
+# Project specific
+images/output/*
+!images/output/.gitkeep
 
 ### Linux ###
 *~
