@@ -6,10 +6,44 @@ models/
 *.names
 *.onnx
 *.engine
+*.torchscript
+
+# Training outputs and results
+runs/
+coco128/
+*.csv
+*.png
+*.jpg
+*.json
+*.log
+tensorboard/
+
+# Dataset files
+datasets/
+data/
+*.zip
+*.tar.gz
+*.tar
+*.tgz
 
 # Project specific
 images/output/*
 !images/output/.gitkeep
+
+# Checkpoints and training states
+*.pth
+*.pth.tar
+*.ckpt
+*.bin
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Local development
+.env
+.env.local
+.env.*.local
 
 ### Linux ###
 *~
@@ -177,6 +211,21 @@ fabric.properties
 __pycache__/
 *.py[cod]
 *$py.class
+
+# PyTest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Mypy
+.mypy_cache/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # C extensions
 *.so
