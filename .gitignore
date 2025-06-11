@@ -27,7 +27,9 @@ data/
 *.tgz
 
 # Project specific
-images/output/*
+images/*
+!images/.gitkeep
+!images/output/
 !images/output/.gitkeep
 
 # Checkpoints and training states

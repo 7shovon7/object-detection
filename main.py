@@ -5,7 +5,6 @@ from ultralytics import YOLO
 from pathlib import Path
 import numpy as np
 from datetime import datetime
-import os
 
 def ensure_dir(directory):
     """Ensure a directory exists, create if it doesn't."""

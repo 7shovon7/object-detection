@@ -3,6 +3,13 @@ import wandb
 import yaml
 from pathlib import Path
 from ultralytics import YOLO
+import torch
+
+def ensure_models_dir():
+    """Ensure the models directory exists, create if it doesn't."""
+    models_dir = Path("models")
+    models_dir.mkdir(parents=True, exist_ok=True)
+    return models_dir
 
 def setup_wandb():
     """Initialize Weights & Biases for experiment tracking."""
@@ -31,8 +38,17 @@ def train_model(data_yaml, epochs=50, imgsz=640, batch=16):
     run = setup_wandb()
     
     try:
+        # Create a consistent output directory for this run
+        run_id = f"run-{wandb.run.id}"
+        output_dir = Path("runs") / "train" / run_id
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Ensure models directory exists
+        models_dir = ensure_models_dir()
+        model_path = models_dir / 'yolov8x.pt'
+        
         # Load a pretrained YOLOv8x model
-        model = YOLO('yolov8x.pt')
+        model = YOLO(str(model_path))
         
         # Train the model with W&B integration
         results = model.train(
@@ -41,8 +57,9 @@ def train_model(data_yaml, epochs=50, imgsz=640, batch=16):
             imgsz=imgsz,
             batch=batch,
             project='object-detection',
-            name=f'run-{wandb.run.id}',
+            name=run_id,
             save_period=10,  # Save checkpoint every 10 epochs
+            exist_ok=True,    # Overwrite existing runs with the same name
             device=0,  # Use GPU 0
             workers=8,
             optimizer='auto',
